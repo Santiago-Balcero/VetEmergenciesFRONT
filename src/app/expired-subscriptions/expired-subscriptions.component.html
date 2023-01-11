@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<div class="container" *ngIf="admin">
+    <h2>Actualizar estado de suscripciones vencidas</h2>
+    <p>Cada día a las 00 horas el sistema desactiva automáticamente las suscripciones que se vencieron el día anterior.</p>
+    <p>Si quieres realizar el proceso manualmente haz click aquí:</p>
+    <button pButton (click)="checkForExpiredSubscriptions()" class="p-button-raised p-button-rounded" label="Desactivar suscripciones vencidas" ></button>
+</div>

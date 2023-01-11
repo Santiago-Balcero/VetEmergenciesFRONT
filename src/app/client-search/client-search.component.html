@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>{{ title }}</h2>
+    <p>{{ subtitle }}</p>
+    <div *ngIf="admin">
+    <form (ngSubmit)="onSubmit()" [formGroup]="emergenciesSearchForm">
+        <div class="form-group">
+            <p-dropdown [options]="numberType" id="numberType" name="numberType"
+                formControlName="numberType" optionLabel="numberType" optionValue="idNumberType"
+                placeholder="Criterio de búsqueda" ></p-dropdown>
+            <div class="alert" *ngIf="checkValid('numberType', 'required')">
+                * Campo requerido.
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="" name="number" formControlName="number" 
+                placeholder="Número para búsqueda" pInputText pTooltip="Sin puntos, guiones o espacios." tooltipEvent="focus" />
+            <div class="alert" *ngIf="checkValid('number', 'required')">* Campo requerido.</div>
+            <div class="alert" *ngIf="checkValid('number', 'minlength')">* Número no válido.</div>
+            <div class="alert" *ngIf="checkValid('number', 'maxlength')">* Número no válido.</div>
+            <div class="alert" *ngIf="checkValid('number', 'pattern')">* Número no válido.</div>
+        </div>
+        <div class="form-group" id="btn">
+            <button pButton type="submit" class="p-button-raised p-button-rounded" label="Buscar" [disabled]="emergenciesSearchForm.invalid"></button>
+        </div>
+    </form>
+</div>
+    <div *ngIf="subscriptionWithEmergencies">
+        <div class="col-subscription">
+            <div class="row-info">
+                <h3>Suscripción: {{ subscriptionWithEmergencies.idSubscription }}</h3>
+                <p>
+                    <strong>Estado:</strong> {{ subscriptionWithEmergencies.isActive === 1 ? "Activo" : "Inactivo" }}
+                    <br />
+                    <strong>Fecha de inicio:</strong> {{ subscriptionWithEmergencies.startDate }}
+                    <br />
+                    <strong>Fecha de vencimiento:</strong> {{ subscriptionWithEmergencies.finishDate }}
+                    <br />
+                </p> 
+                <h3>Cliente: {{ subscriptionWithEmergencies.clientName }} {{ subscriptionWithEmergencies.clientLastname }}</h3>
+                <p>
+                    <strong>Documento:</strong> {{ subscriptionWithEmergencies.clientDocument }}
+                    <br />
+                    <strong>Teléfono:</strong> {{ subscriptionWithEmergencies.clientTelephone }}
+                    <br />
+                    <strong>Correo electrónico:</strong> {{ subscriptionWithEmergencies.clientEmail }}
+                    <br />
+                </p> 
+            </div>
+        </div>
+        <div class="col-emergencies">
+            <h3>Emergencias registradas:</h3>
+            <div *ngIf="subscriptionWithEmergencies.emergencies.length > 0; else elseBlockEmergencies" class="cards">
+                <p-card *ngFor="let emergency of subscriptionWithEmergencies.emergencies" class="emergencies" [style]="{ width: '350px', height: '400px' }">
+                    <h3>Id emergencia:  {{ emergency.idEmergency }}</h3>
+                    <p>
+                        <strong>Estado:</strong> {{ emergency.emergencyStatus }}
+                        <br />
+                        <strong>Fecha emergencia:</strong> {{ emergency.emergencyDate }}
+                        <br />
+                        <strong>Última actualización:</strong> {{ emergency.lastStatusUpdateDate }}
+                        <br />
+                        <strong>Especie:</strong> {{ emergency.emergencySpecies }}
+                        <br />
+                        <strong>Síntoma:</strong> {{ emergency.emergencyMainSymptom }}
+                        <br />
+                        <strong>Descripción: </strong>{{ emergency.emergencyDescription }}
+                        <br />
+                    </p>
+                    <p>
+                        <strong>Clínica:</strong> {{ emergency.clinicName }}
+                        <br />
+                        <strong>NIT clínica:</strong> {{ emergency.clinicNit }}
+                        <br />
+                        <strong>Dirección clínica:</strong> {{ emergency.clinicAddress }}
+                        <br />
+                        <strong>Municipio clínica:</strong> {{ emergency.clinicCity }}, {{ emergency.clinicDepartment }}
+                        <br />
+                        <strong>Clínica:</strong> {{ emergency.clinicName }}
+                        <br />
+                    </p>
+                        <div class="emergency-btns" *ngIf="admin">
+                        <button pButton *ngIf="emergency.emergencyStatus === 'PENDIENTE DE APROBACIÓN'" class="p-button-raised p-button-rounded" label="Aprobar" 
+                            (click)="approveEmergency(emergency.idEmergency, subscriptionWithEmergencies.idSubscription)"></button>
+                        <button pButton *ngIf="emergency.emergencyStatus === 'APROBADA'" class="p-button-raised p-button-rounded" label="Confirmar" 
+                            (click)="confirmEmergency(emergency.idEmergency, subscriptionWithEmergencies.idSubscription)"></button>
+                        </div>
+                        <div class="emergency-btns" >
+                            <button pButton class="p-button-raised p-button-rounded" label="Ver detalles" 
+                            (click)="goToEmergencyDetail(emergency.idEmergency)"></button>
+                        </div>
+                </p-card>
+            </div>
+            <ng-template #elseBlockEmergencies>
+                <h3>No hay emergencias registradas.</h3>
+            </ng-template>
+        </div>
+    </div>
+</div>

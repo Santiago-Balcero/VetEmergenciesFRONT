@@ -1,0 +1,84 @@
+.expiredContainer {
+    margin-top: 10px;
+    background-color: #FBFBFB;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.emergency-form {
+    background-color: #FBFBFB;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    color: #016d38;
+    font-family: "RobotoCondensedBold";
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+h4 {
+    font-family: "RobotoCondensedBold";
+    color: #1B1B1B;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+p {
+    font-family: "RobotoCondensedRegular";
+    color: #1B1B1B;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    border: none;
+    background: #ffdc5d;
+    color: #016d38;
+    box-shadow: none;
+    font-family: "RobotoCondensedBold";
+    width: fit-content;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 500px;
+    align-items: center;
+}
+
+input {
+    font-family: "RobotoCondensedRegular";
+}
+
+.alert {
+    font-family: "RobotoCondensedRegular";
+    font-size: 12px;
+    color:#ee2828;
+}
+
+textarea {
+    width: 370px;
+    max-width: 370px;
+    font-family: "RobotoCondensedRegular";
+
+}
+
+/* This two properties are set to override fonts from dropdown menu label and items */
+:host ::ng-deep .p-dropdown-label {
+    font-family: "RobotoCondensedRegular";
+    width: 330px;
+}
+
+:host ::ng-deep .p-dropdown-item {
+    font-family: "RobotoCondensedRegular";
+}

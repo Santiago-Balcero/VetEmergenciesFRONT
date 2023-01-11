@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="container" #mapContainer id="map">
+    <div class="row">
+        <div class="col">
+            <h2>Clínicas activas aliadas a nuestra red de atención a emergencias veterinarias:</h2>
+            <p>Selecciona la clínica más cercana a tu ubicación y haz click en el marcador rojo para ver información general.
+                Para información más detallada de cada clínica haz click en el enlace.</p>
+        </div>    
+        <div class="col">
+            <button pButton class="p-button-raised p-button-rounded" label="Ver tabla" routerLink="/clinics" routerLinkActive="active" id="tablebtn"></button>
+        </div>
+    </div>
+    <p-gmap [options]="options" [overlays]="overlays" (onMapReady)="setMap($event)"
+        (onOverlayClick)="handleOverlayClick($event)" [style]="{'width':'100%','height':'420px'}" >
+    </p-gmap>
+</div>

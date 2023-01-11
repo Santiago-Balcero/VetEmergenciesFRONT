@@ -1,0 +1,104 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="form-group" id="header">
+            <h2>{{ formTitle }}</h2>
+            <p>{{ formInstructions }}</p>
+            <p *ngIf="!createMode" id="lastUpdateInfo">{{ lastUpdateInfo }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form (ngSubmit)="onSubmit()" [formGroup]="newClinicForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="clinicNit" name="clinicNit" formControlName="clinicNit"
+                        placeholder="NIT" [readOnly]="disableNit" pInputText
+                        pTooltip="Sin separadores ni dígito de verificación." tooltipEvent="focus" />
+                    <div class="alert" *ngIf="checkValid('clinicNit', 'required')">        
+                        * Campo requerido.
+                    </div>
+                    <div class="alert" *ngIf="checkValid('clinicNit', 'minlength') || checkValid('clinicNit', 'maxlength') || checkValid('clinicNit', 'pattern')">
+                        * NIT no válido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="clinicName" name="clinicName"
+                        formControlName="clinicName" placeholder="Nombre de la clínica" pInputText />
+                    <div class="alert" *ngIf="checkValid('clinicName', 'required')">
+                        * Campo requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p-dropdown [options]="departmentsList" id="clinicDepartment" name="clinicDepartment"
+                        formControlName="clinicDepartment" optionLabel="department" optionValue="idDepartment"
+                        placeholder="Departamento" (onChange)="setCities()"></p-dropdown>
+                    <div class="alert" *ngIf="checkValid('clinicDepartment', 'required')">
+                        * Campo requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p-dropdown [options]="citiesList" id="clinicCity" name="clinicCity" formControlName="clinicCity"
+                        optionLabel="city" optionValue="city" placeholder="Municipio"></p-dropdown>
+                    <div class="alert" *ngIf="checkValid('clinicCity', 'required')">
+                        * Campo requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="clinicAddress" name="clinicAddress"
+                        formControlName="clinicAddress" placeholder="Dirección" pInputText
+                        pTooltip="Por ejemplo: Carrera 38c 15d-99 o Autopista Norte 140-22." tooltipEvent="focus" />
+                    <div class="alert" *ngIf="checkValid('clinicAddress', 'required')">
+                        * Campo requerido.
+                    </div>
+                    <div class="alert" *ngIf="checkValid('clinicAddress', 'minlength')">
+                        * Dirección no válida.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="clinicTelephone" name="clinicTelephone"
+                        formControlName="clinicTelephone" placeholder="Teléfono" pInputText pInputText
+                        pTooltip="Incluyendo el indicativo, por ejemplo: 6019999999." tooltipEvent="focus" />
+                    <div class="alert" *ngIf="checkValid('clinicTelephone', 'required')">
+                        * Campo requerido.
+                    </div>
+                    <div class="alert" *ngIf="checkValid('clinicTelephone', 'minlength') || checkValid('clinicTelephone', 'maxlength') || checkValid('clinicTelephone', 'pattern')">
+                        * Teléfono no válido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="clinicEmail" name="clinicEmail"
+                        formControlName="clinicEmail" placeholder="Correo electrónico" pInputText />
+                    <div class="alert" *ngIf="checkValid('clinicEmail', 'required')">
+                        * Campo requerido.
+                    </div>
+                    <div class="alert" *ngIf="checkValid('clinicEmail', 'email')">
+                        * Correo no válido.
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col" >
+            <div class="form-services" id="servs">
+                <h3>Selecciona los servicios ofrecidos por la clínica:</h3>
+                <div *ngFor="let service of servicesList" class="field-checkbox">
+                    <p-checkbox name="service.service" id="service.idService" value="service.idService"
+                        [value]="service" [(ngModel)]="selectedServices" [inputId]="service.service"></p-checkbox>
+                    <label [for]="service.idService">{{service.service}}</label>
+                </div>
+                <div class="alert" *ngIf="selectedServices.length === 0">
+                    * Selecciona al menos un servicio.
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+        <div class="form-group" id="btn">
+            <button pButton type="submit" class="p-button-raised p-button-rounded" label="{{ buttonText }}"
+                [disabled]="newClinicForm.invalid || selectedServices.length === 0"
+                (click)="onSubmit()"></button>
+        </div>
+
+    </div>
+
+</div>

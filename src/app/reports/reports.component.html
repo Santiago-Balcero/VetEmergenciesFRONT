@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>Consulta de emergencias atendidas</h2>
+    <p>En esta sección podrás consultar el número de emergencias atendidas por año, mes, especie animal y síntoma reportado.<br />
+    El sistema realiza un cálculo al inicio de cada mes para realizar este conteo. <br />
+    Si tu selección incluye el mes actual, el sistema realizará un conteo parcial con fecha de corte a hoy.<br /></p>
+    <div class="form-container">
+        <form [formGroup]="reportsForm">
+            <div class="form-group">
+                <p-dropdown [options]="yearsList" id="year" name="year"
+                    formControlName="year" optionLabel="year" optionValue="yearValue"
+                    placeholder="Año" ></p-dropdown>
+                <div class="alert" *ngIf="checkValid('year', 'required')">
+                    * Campo requerido.
+                </div>
+            </div>
+            <div class="form-group">
+                <p-dropdown [options]="monthsList" id="month" name="month"
+                    formControlName="month" optionLabel="month" optionValue="monthValue"
+                    placeholder="Mes" ></p-dropdown>
+                <div class="alert" *ngIf="checkValid('month', 'required')">
+                    * Campo requerido.
+                </div>
+            </div>
+            <div class="form-group">
+                <p-dropdown [options]="speciesList" id="species" name="species"
+                    formControlName="species" optionLabel="species" optionValue="idSpecies"
+                    placeholder="Especie" ></p-dropdown>
+                <div class="alert" *ngIf="checkValid('species', 'required')">
+                    * Campo requerido.
+                </div>
+            </div>
+            <div class="form-group">
+                <p-dropdown [options]="symptomsList" id="symptoms" name="symptoms"
+                    formControlName="symptom" optionLabel="mainSymptom" optionValue="idMainSymptom"
+                    placeholder="Síntoma" ></p-dropdown>
+                <div class="alert" *ngIf="checkValid('symptom', 'required')">
+                    * Campo requerido.
+                </div>
+            </div>
+        </form>
+    </div>
+    <button pButton (click)="onSubmit()" type="submit" class="p-button-raised p-button-rounded" label="Ver reporte" [disabled]="reportsForm.invalid"></button>
+    <button pButton (click)="downloadReport()" class="p-button-raised p-button-rounded" label="Descargar reporte" [disabled]="reportsForm.invalid"></button>
+</div>
+<div class="container">
+    <p-table #dt [value]="reports" [scrollable]="true" scrollHeight="400px" [globalFilterFields]="['idReport','reportYear', 'reportMonth', 'species', 'mainSymptom']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                <div class="col">
+                    <h3>
+                        Total de emergencias atendidas: {{totalEmergencies}}
+                    </h3>
+                    <span class="p-input-icon-left ml-auto" id="emergenciestitle">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" id="searchInput" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar" />
+                    </span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let column of columns">
+                    {{column.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-report>
+            <tr>
+                <td *ngFor="let column of columns">
+                    {{report[column.field]}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    </div>

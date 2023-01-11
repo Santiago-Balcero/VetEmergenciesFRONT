@@ -1,0 +1,104 @@
+<app-navbar></app-navbar>
+<div *ngIf="clinic; else elseBlock" class="container">
+    <div class="col-clinic">
+        <div class="row-info">
+            <h2>{{ clinic.clinicName }}</h2>
+            <p *ngIf="admin">
+                <strong>Estado en el sistema:</strong> {{ clinic.isActive === 1 ? "Activo" : "Inactivo" }}
+                <br />
+                <strong>Última modificación:</strong> {{ clinic.lastUpdateAction }}
+                <br />
+                {{ clinic.lastUpdateDate }}
+            </p>
+            <p>
+                <strong>Id:</strong> {{ clinic.idClinic }}
+                <br />
+                <strong>NIT:</strong> {{ clinic.clinicNit }}
+                <br />
+                <strong>Ubicación:</strong> {{ clinic.clinicAddress }},
+                {{ clinic.clinicCity }},
+                {{ clinic.clinicDepartment.department }}
+                <br />
+                <strong>Teléfono:</strong> {{ clinic.clinicTelephone }}
+                <br />
+                <strong>Correo electrónico:</strong> {{ clinic.clinicEmail }}
+                <br />
+            </p>
+            <h3>Servicios:</h3>
+            <li *ngFor="let service of clinic.clinicServices">
+                {{ service.service }}.
+            </li>
+        </div>
+        <div class="row-buttons" *ngIf="admin; else elseBlockUser">
+            <p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"
+                rejectButtonStyleClass="p-button-raised p-button-rounded"
+                acceptButtonStyleClass="p-button-raised p-button-rounded" acceptLabel="Sí" rejectLabel="No">
+            </p-confirmDialog>
+            <button pButton class="p-button-raised p-button-rounded" label="Actualizar" 
+                (click)="goToEditClinic()"></button>
+            <button *ngIf="clinic.isActive === 1" pButton class="p-button-raised p-button-rounded" label="Desactivar"
+                (click)="confirmDeactivateClinic()"></button>
+            <button *ngIf="clinic.isActive === 0" pButton class="p-button-raised p-button-rounded" label="Activar"
+            (click)="confirmActivateClinic()"></button>
+        <button pButton class="p-button-raised p-button-rounded" label="Borrar"
+                (click)="confirmDeleteClinic()"></button>
+        </div>
+        <ng-template #elseBlockUser >
+            <div class="row-buttons">
+                <button pButton class="p-button-raised p-button-rounded" label="Solicita atención en esta clínica veterinaria" (click)="goToEmergencyForm()"></button>
+            </div>
+        </ng-template>
+    </div>
+    <div class="col-vets">
+        <h3>Veterinarios:</h3>
+        <div *ngIf="veterinarians.length > 0; else elseBlockVet" class="cards">
+            <p-card *ngFor="let vet of veterinarians" header="{{ vet.vetName }} {{ vet.vetLastname }}" class="vets" [style]="{ width: 'fit-content', height: 'fit-content' }">
+                <p *ngIf="admin">
+                    <strong>Estado en el sistema:</strong> {{ vet.isActive ? "Activo" : "Inactivo" }}
+                    <br />
+                    <strong>Última modificación:</strong>
+                    <br />
+                    {{ vet.lastUpdateAction }}
+                    <br />
+                    {{ vet.lastUpdateDate }}
+                </p>
+                <p>
+                    <strong>Id: </strong>{{ vet.idVeterinarian }}
+                    <br />
+                    <strong>Documento: </strong>{{ vet.vetDocument }}
+                    <br />
+                    <strong>Teléfono: </strong>{{ vet.vetTelephone }}
+                    <br />
+                    {{ vet.vetEmail }}
+                </p>
+                <div class="vets-btns" *ngIf="admin">
+                    <p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"
+                        rejectButtonStyleClass="p-button-raised p-button-rounded"
+                        acceptButtonStyleClass="p-button-raised p-button-rounded" acceptLabel="Sí" rejectLabel="No">
+                    </p-confirmDialog>
+                    <button pButton class="p-button-raised p-button-rounded" label="Actualizar" 
+                        (click)="goToEditVeterinarian(vet.idVeterinarian!)"></button>
+                    <button *ngIf="vet.isActive === 1" pButton class="p-button-raised p-button-rounded"
+                        (click)="confirmDeactivateVet(vet.idVeterinarian)" label="Desactivar"></button>
+                    <button *ngIf="vet.isActive === 0" pButton class="p-button-raised p-button-rounded"
+                        (click)="confirmActivateVet(vet.idVeterinarian)" label="Activar"></button>
+                    <button pButton class="p-button-raised p-button-rounded"
+                        (click)="confirmDeleteVet(vet.idVeterinarian)" label="Borrar"></button>
+                </div>
+            </p-card>
+        </div>
+        <div class="row-registervet" *ngIf="admin">
+            <button pButton class="p-button-raised p-button-rounded" label="Registrar veterinario" (click)="goToCreateVet()"></button>
+        </div>
+        <ng-template #elseBlockVet>
+            <h3>No hay veterinarios registrados para esta clínica.</h3>
+        </ng-template>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <p-card>
+        <h3>Clínica no encontrada.</h3>
+        <button pButton class="p-button-raised p-button-rounded" label="Volver a clínicas" routerLink="/clinics"
+            routerLinkActive="active"></button>
+    </p-card>
+</ng-template>

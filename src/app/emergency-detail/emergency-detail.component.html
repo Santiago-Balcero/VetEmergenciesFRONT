@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="container" >
+    <div class="col">
+        <div class="row">
+            <h2>Orden de servicio de emergencia veterinaria</h2>
+            <h2># {{idEmergency}}</h2>
+    </div>
+        <div class="row-info">
+            <h3>ESTADO: {{emergency?.emergencyStatus}}</h3>
+            <p><strong>Fecha y hora de creación de emergencia: </strong>{{emergency?.emergencyDate}}</p>
+            <p><strong>Última actualización de emergencia: </strong>{{emergency?.lastStatusUpdateDate}}</p>
+            <p><strong>Suscripción #: </strong>{{emergency?.emergencySubscription}}</p>
+            <p><strong>Cliente: </strong>
+                {{emergency?.clientName}} {{emergency?.clientLastname}}</p>
+            <p><strong>Documento cliente #: </strong>{{emergency?.clientDocument}}</p>
+            <p><strong>Teléfono cliente: </strong>{{emergency?.clientTelephone}}</p>
+            <p><strong>Correo electrónico cliente: </strong>{{emergency?.clientEmail}}</p>
+            <p><strong>Clínica: </strong>{{emergency?.clinicName}}</p>
+            <p><strong>Id de clínica: </strong>{{emergency?.emergencyClinicId}}</p>
+            <p><strong>Teléfono: </strong>{{emergency?.clinicTelephone}}</p>
+            <p><strong>Correo electrónico: </strong>{{emergency?.clinicEmail}}</p>
+            <p><strong>Dirección: </strong>{{emergency?.clinicAddress}}, {{emergency?.clinicCity}}, {{emergency?.clinicDepartment}}</p>
+            <p><strong>Especie: </strong>{{emergency?.emergencySpecies}}</p>
+            <p><strong>Síntoma principal: </strong>{{emergency?.emergencyMainSymptom}}</p>
+            <p><strong>Descripción de emergencia: </strong>{{emergency?.emergencyDescription}}</p>
+        </div>
+        
+    </div>
+</div>

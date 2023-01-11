@@ -1,0 +1,83 @@
+.container {
+    margin-top: 10px;
+    background-color: #FBFBFB;
+    display: flex;
+    padding: 30px;
+}
+
+.col-clinic {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 420px;
+}
+
+h2 {
+    color: #016d38;
+    font-family: "RobotoCondensedBold";
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+button {
+    border: none;
+    background: #ffdc5d;
+    color: #016d38;
+    box-shadow: none;
+    font-family: "RobotoCondensedBold";
+    width: fit-content;
+}
+
+.row-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: fit-content;
+    height: fit-content;
+}
+
+h3 {
+    font-family: "RobotoCondensedBold";
+    color: #1B1B1B;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+li {
+    font-family: "RobotoCondensedRegular";
+    color: #1B1B1B;
+}
+
+p {
+    font-family: "RobotoCondensedRegular";
+    color: #1B1B1B;
+    margin-top: 1px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.vets {
+    margin: 5px;
+}
+
+.row-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 30px;
+}
+
+.row-registervet {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vets-btns {
+    display: flex;
+    justify-content: space-evenly;
+}

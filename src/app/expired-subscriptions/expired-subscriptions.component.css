@@ -1,0 +1,33 @@
+.container {
+    margin-top: 10px;
+    background-color: #FBFBFB;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    color: #016d38;
+    font-family: "RobotoCondensedBold";
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+p {
+    font-family: "RobotoCondensedRegular";
+    color: #1B1B1B;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    border: none;
+    background: #ffdc5d;
+    color: #016d38;
+    box-shadow: none;
+    font-family: "RobotoCondensedBold";
+    width: fit-content;
+    margin-top: 5px;
+}

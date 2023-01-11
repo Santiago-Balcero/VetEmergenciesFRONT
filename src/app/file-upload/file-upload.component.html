@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>Carga de clientes al sistema</h2>
+    <p>Selecciona un archivo CSV que contenga la siguiente información de los clientes:</p>
+    <p>Número de documento, nombres, apellidos, teléfono, correo electrónico y contraseña asignada.</p>
+    <p-fileUpload name="myfile[]" url="C:\TC_SB_35\Desarrollo\Front\tc_sb_35_front\src\assets\uploaded_files"
+    accept="text/*" [customUpload]="true" styleClass="button-primary" (uploadHandler)="uploadFile($event)" [invalidFileTypeMessageSummary]="invalidFileTypeMsg"></p-fileUpload>
+</div>

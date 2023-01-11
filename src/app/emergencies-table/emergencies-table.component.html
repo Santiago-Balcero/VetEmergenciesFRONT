@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="container">
+<p-table #dt [value]="emergencies" [scrollable]="true" scrollHeight="400px" [globalFilterFields]="['idEmergency','emergencyClinic', 'emergencySubscription', 'emergencySpecies', 'emergencyStatus']">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="col">
+                <h3>
+                    Emergencias veterinarias pendientes de aprobación:
+                </h3>
+                <span class="p-input-icon-left ml-auto" id="emergenciestitle">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" id="searchInput" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar" />
+                </span>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let column of columns">
+                {{column.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-emergency>
+        <tr>
+            <td *ngFor="let column of columns">
+                {{emergency[column.field]}}
+            </td>
+            <td>
+                <button *ngIf="admin" pButton type="submit" class="p-button-raised p-button-rounded" label="Aprobar" (click)="approveEmergency(emergency.idEmergency, emergency.emergencySubscriptionId)"></button>
+            </td>
+            <td>
+                <button pButton type="submit" class="p-button-raised p-button-rounded" label="Ver" (click)="goToEmergencyDetail(emergency.idEmergency)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

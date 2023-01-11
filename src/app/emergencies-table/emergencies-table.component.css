@@ -1,0 +1,55 @@
+.container {
+    margin-top: 10px;
+}
+
+th {
+    width: fit-content;
+    font-family: "RobotoCondensedBold";
+    color: #1B1B1B;
+}
+
+.table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+td{
+    font-family: "RobotoCondensedRegular";
+    color: #1B1B1B;
+}
+
+button {
+    border: none;
+    background: #ffdc5d;
+    color: #016d38;
+    box-shadow: none;
+    font-family: "RobotoCondensedBold";
+    width: fit-content;
+}
+
+h3 {
+    color: #016d38;
+    font-family: "RobotoCondensedBold";
+    margin: 0px;
+}
+
+.col {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 450px;
+}
+
+.col-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 250px;
+}
+
+#mapbtn {
+    margin-left: 15px;
+}

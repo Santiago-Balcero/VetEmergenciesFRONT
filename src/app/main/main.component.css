@@ -1,0 +1,79 @@
+#main {
+    height: 500px;
+    color: #fff;background-image: url("src/assets/images/PETFAMILY.jpg");
+    background-size: cover;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 180px;
+    padding-top: 20px;
+}
+
+#form-title {    
+    padding-right: 140px;
+    padding-top: 20px;
+}
+
+#title {
+    padding-right: 100px;
+    padding-top: 50px;
+}
+
+#text {
+    padding-right: 100px;
+    padding-top: 20px;
+    text-justify: right;
+}
+
+#text2 {
+    padding-top: 0px;
+    padding-right: 100px;
+    text-justify: right;
+}
+
+#text3 {
+    padding-top: 0px;
+    padding-right: 100px;
+    text-justify: right;
+}
+
+input {
+    font-family: "RobotoCondensedRegular";
+}
+
+button {
+    border: none;
+    background: #ffdc5d;
+    color: #016d38;
+    box-shadow: none;
+    font-family: "RobotoCondensedBold";
+    width: fit-content;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    align-items: center;
+}
+
+h1 {
+    color: #016d38;
+    font-family: "RobotoCondensedBold";
+    margin: 0px;
+}
+
+h3 {
+    color: #1B1B1B;
+    font-family: "RobotoCondensedRegular";
+    margin: 0px;
+}
+
+p {
+    color: #1B1B1B;
+    font-family: "RobotoCondensedRegular";
+    margin: 0px;
+}

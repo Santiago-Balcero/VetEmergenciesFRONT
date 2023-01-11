@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="col">
+        <div class="row">
+            <div class="form-group" id="header">
+                <h2>{{ formTitle }}</h2>
+                <p>{{ formInstructions }}</p>
+                <p *ngIf="!createMode" id="lastUpdateInfo">{{ lastUpdateInfo }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <form (ngSubmit)="onSubmit()" [formGroup]="newVeterinarianForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="vetDocument" name="vetDocument" formControlName="vetDocument" 
+                        placeholder="Número de documento" [readOnly]="disableDocument" pInputText pTooltip="Sin puntos, guiones o espacios." tooltipEvent="focus" />
+                    <div class="alert" *ngIf="checkValid('vetDocument', 'required')">* Campo requerido.</div>
+                    <div class="alert" *ngIf="checkValid('vetDocument', 'minlength') || checkValid('vetDocument', 'maxlength') || checkValid('vetDocument', 'pattern')">
+                        * Documento no válido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="vetName" name="vetName" formControlName="vetName" placeholder="Nombres" pInputText />
+                    <div class="alert" *ngIf="checkValid('vetName', 'required')">* Campo requerido.</div>
+                    <div class="alert" *ngIf="checkValid('vetName', 'maxlength')">* Nombres no válidos.</div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="vetLastname" name="vetLastname" formControlName="vetLastname" placeholder="Apellidos" pInputText />
+                    <div class="alert" *ngIf="checkValid('vetLastname', 'required')">* Campo requerido.</div>
+                    <div class="alert" *ngIf="checkValid('vetLastname', 'maxlength')">* Apellidos no válidos.</div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="vetTelephone" name="vetTelephone" formControlName="vetTelephone" 
+                        placeholder="Teléfono celular" pInputText pInputText pTooltip="Sin espacios ni guiones." tooltipEvent="focus" />
+                    <div class="alert" *ngIf="checkValid('vetTelephone', 'required')">* Campo requerido.</div>
+                    <div class="alert" *ngIf="checkValid('vetTelephone', 'minlength') || checkValid('vetTelephone', 'maxlength') || checkValid('vetTelephone', 'pattern')">
+                        * Teléfono no válido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="vetEmail" name="vetEmail" formControlName="vetEmail" placeholder="Correo electrónico" pInputText />
+                    <div class="alert" *ngIf="checkValid('vetEmail', 'required')">* Campo requerido.</div>
+                    <div class="alert" *ngIf="checkValid('vetEmail', 'email')">* Correo no válido.</div>
+                </div>
+                <div class="form-group" id="btn">
+                    <button pButton type="submit" class="p-button-raised p-button-rounded" label="{{ buttonText }}" [disabled]="newVeterinarianForm.invalid"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

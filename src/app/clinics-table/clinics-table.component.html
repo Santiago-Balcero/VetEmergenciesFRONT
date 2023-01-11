@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="container">
+<p-table #dt [value]="clinics" [scrollable]="true" scrollHeight="400px" [globalFilterFields]="['clinicName','clinicNit', 'clinicDepartment.department', 'clinicCity', 'isActive']">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="col">
+                <h3>
+                    Clínicas aliadas a la red:
+                </h3>
+                <span class="p-input-icon-left ml-auto" id="clinicsTitle">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" id="searchInput" (input)="applyFilterGlobal($event, 'contains')" placeholder="Buscar" />
+                </span>
+            </div>
+            <div class="col-buttons">
+                <button *ngIf="admin" pButton class="p-button-raised p-button-rounded" label="Registrar clínica" routerLink="/clinics/newclinic" routerLinkActive="active" ></button>
+                <button pButton class="p-button-raised p-button-rounded" label="Ver mapa" routerLink="/map" routerLinkActive="active" id="mapbtn"></button>
+        </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let column of columns">
+                {{column.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-clinic>
+        <tr>
+            <td *ngFor="let column of columns">
+                <div *ngIf="column.subfield; else elseBlock">
+                    {{clinic[column.field][column.subfield]}}
+                </div>
+                <ng-template #elseBlock>
+                    {{clinic[column.field]}}
+                </ng-template>
+            </td>
+            <td>
+                <button pButton type="submit" class="p-button-raised p-button-rounded" label="Ver" (click)="goToClinicDetail(clinic.idClinic)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

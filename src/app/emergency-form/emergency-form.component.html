@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+<div class="emergencyForm" *ngIf="isActive === 1; else elseBlock">
+    <div class="col">
+        <div class="row">
+            <div class="form-group" id="header" *ngIf="clinic">
+                <h2>Registro de emergencia</h2>
+                <p>Ingresa la información solicitada para registrar tu emergencia en: </p>
+                <p><strong>Clínica: </strong>{{clinic.clinicName}}</p>
+                <p><strong>Teléfono: </strong>{{clinic.clinicTelephone}}</p>
+                <p><strong>Correo electrónico: </strong>{{clinic.clinicEmail}}</p>
+                <p><strong>Dirección: </strong>{{clinic.clinicAddress}}, {{clinic.clinicCity}}, {{clinic.clinicDepartment}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <form (ngSubmit)="onSubmit()" [formGroup]="newEmergencyForm">
+                <div class="form-group">
+                    <p-dropdown [options]="symptomsList" id="mainSymptom" name="mainSymptom"
+                        formControlName="emergencyMainSymptom" optionLabel="mainSymptom" optionValue="idMainSymptom"
+                        placeholder="Síntoma principal" ></p-dropdown>
+                    <div class="alert" *ngIf="checkValid('mainSymptom', 'required')">
+                        * Campo requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p-dropdown [options]="speciesList" id="species" name="species"
+                        formControlName="emergencySpecies" optionLabel="species" optionValue="idSpecies"
+                        placeholder="Especie de tu mascota" ></p-dropdown>
+                    <div class="alert" *ngIf="checkValid('species', 'required')">
+                        * Campo requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea pInputTextarea class="form-control" id="emergencyDescription" name="emergencyDescription"
+                    formControlName="emergencyDescription" placeholder="Describe brevemente la emergencia"></textarea>
+                    <div class="alert" *ngIf="checkValid('emergencyDescription', 'required')">
+                        * Campo requerido.
+                    </div>
+                    <div class="alert" *ngIf="checkValid('emergencyDescription', 'maxlength')">
+                        * Texto demasiado largo.
+                    </div>
+                </div>
+                <div class="form-group" id="btn">
+                    <button pButton type="submit" class="p-button-raised p-button-rounded" label="Registrar emergencia" [disabled]="newEmergencyForm.invalid"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <div class="expiredContainer" *ngIf="clinic">
+        <h2>¡Tu suscripción se ha vencido!</h2>
+        <p><strong>Fecha de vencimiento: </strong>{{subscription?.finishDate}}</p>
+        <h4>Debido al estado de tu suscripción no tienes acceso a cobertura en emergencias veterinarias. <br />
+            Sin embargo, puedes comunicarte directamente con la clínica veterinaria para solucionar tu emergencia.</h4>
+        <p><strong>Clínica: </strong>{{clinic.clinicName}}</p>
+        <p><strong>Teléfono: </strong>{{clinic.clinicTelephone}}</p>
+        <p><strong>Correo electrónico: </strong>{{clinic.clinicEmail}}</p>
+        <p><strong>Dirección: </strong>{{clinic.clinicAddress}}, {{clinic.clinicCity}}, {{clinic.clinicDepartment}}</p>
+        <!-- Define method for renewing subscription -->
+        <button pButton (click)="renewSubscription()" class="p-button-raised p-button-rounded" label="Renovar suscripción" ></button> 
+        </div>
+</ng-template>
+ 

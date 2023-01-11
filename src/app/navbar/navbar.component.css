@@ -1,0 +1,17 @@
+#top {
+    display: flex;
+    align-items: center;
+    background-color: #016d38;
+    color: #FFFFFF;
+    justify-content: center;
+    height: 50px;
+    font-family: "RobotoCondensedBold";
+}
+
+button {
+    border: none;
+    background: #ffdc5d;
+    color: #016d38;
+    box-shadow: none;
+    font-family: "RobotoCondensedBold";
+}
